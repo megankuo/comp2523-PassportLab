@@ -27,12 +27,9 @@ const gitHubLogin = new GitHubStrategy(
     scope: ['user:email'],
   },
   (accessToken, refreshToken, profile, done) => {
-    console.log('the profile is ---' + JSON.stringify(profile));
-    const user = userController.getUserById(parseInt(profile.id));
-    // const user = {
-    //   id: profile.id,
-    //   name: profile.name
-    // };
+    const user = userController.findOrCreate(profile);
+    // console.log(profile);
+    // console.log(user);
 
     return user
       ? done(null, user)
@@ -50,7 +47,6 @@ passport.serializeUser(function (user, done) {
 // serializeUser creates -> req.sessions.passport.user = the user object retrieved from db
 
 passport.deserializeUser(function (id, done) {
-  // let user = userController.getUserById(id);
   let user = userController.getUserById(id);
   if (user) {
     done(null, user);
@@ -59,7 +55,7 @@ passport.deserializeUser(function (id, done) {
   }
 });
 
-module.exports = {
-  localLogin: passport.use(localLogin),
-  gitHubLogin: passport.use(gitHubLogin),
-};
+module.exports =
+  // localLogin: passport.use(localLogin),
+  // gitHubLogin: passport.use(gitHubLogin),
+  passport.use(localLogin).use(gitHubLogin);

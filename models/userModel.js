@@ -17,10 +17,6 @@ const database = [
     email: 'jonathan123@gmail.com',
     password: 'jonathan123!',
   },
-  {
-    id: 61397197,
-    name: 'Megan Kuo',
-  },
 ];
 
 const userModel = {
@@ -36,7 +32,16 @@ const userModel = {
     if (user) {
       return user;
     }
-    throw new Error(`Couldn't find user with id: ${id}`);
+    console.log(`Couldn't find user with id: ${id}`);
+    return false;
+  },
+  createUser: (id, name) => {
+    const newUser = {
+      id: id,
+      name: name,
+    };
+    database.push(newUser);
+    return newUser;
   },
 };
 

@@ -10,7 +10,7 @@ router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
 // localhost:8081/auth/login
 router.post(
   '/login',
-  passport.localLogin.authenticate('local', {
+  passport.authenticate('local', {
     successRedirect: '/dashboard',
     failureRedirect: '/auth/login',
   })
@@ -25,11 +25,11 @@ router.get('/logout', (req, res) => {
 // github stuff
 // router.get('/github', forwardAuthenticated, (req, res) => res.render('login'));
 
-router.get('/github', passport.gitHubLogin.authenticate('github'));
+router.get('/github', passport.authenticate('github'));
 
 router.get(
   '/github/callback',
-  passport.gitHubLogin.authenticate('github', {
+  passport.authenticate('github', {
     successRedirect: '/dashboard',
     failureRedirect: '/auth/login',
   })

@@ -16,6 +16,14 @@ const database = [
     name: 'Jonathan Chen',
     email: 'jonathan123@gmail.com',
     password: 'jonathan123!',
+    isAdmin: true,
+  },
+  {
+    id: 4,
+    name: 'Bob',
+    email: 'bob@me.ca',
+    password: 'hi',
+    isAdmin: true,
   },
 ];
 

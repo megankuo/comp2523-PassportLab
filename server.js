@@ -1,5 +1,6 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
+const { MemoryStore } = require('express-session');
 const session = require('express-session');
 const path = require('path');
 const port = process.env.port || 8000;
@@ -23,6 +24,7 @@ app.use(
 );
 
 const passport = require('./middleware/passport');
+const { connect } = require('./routes/authRoute');
 const authRoute = require('./routes/authRoute');
 const indexRoute = require('./routes/indexRoute');
 
@@ -33,17 +35,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 // this is stuff happening under the hood
 app.use((req, res, next) => {
   console.log(`User details are: `);
   console.log(req.user);
-
+  console.log(Object.keys(JSON.parse(JSON.stringify(req.sessionStore.sessions))));
   console.log('Entire session object:');
   console.log(req.session);
-
+  session.all;
   console.log(`Session details are: `);
   console.log(req.session.passport);
+  console.log(req.sessionID);
   next();
 });
 

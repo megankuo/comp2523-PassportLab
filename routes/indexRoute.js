@@ -39,22 +39,27 @@ router.get('/admin', isAdmin, (req, res) => {
   //   userID: 10000,
   //   sessionID: 'qwerty'
   // })
-  for (const sessionID in allSessions) {
-    // let sessionInfo = JSON.parse(sessionID);
-    let sessionInfo = JSON.parse(allSessions[sessionID]);
-    // let sessionInfoObj = JSON.parse(sessionInfoStr);
-    console.log(sessionInfo);
-    console.log(sessionInfo.passport.user);
-    // console.log(sessionInfoObj);
-    details.push({
-      userID: sessionInfo.passport.user,
-      sessionID: sessionID,
-    });
-  console.log("pooooops");
-  console.log(details);
-  // }
 
-  res.render('admin', { user: req.user, details });
-}});
+  // fk this, this is different from above
+  // for (const sessionID in allSessions) {
+  //   // let sessionInfo = JSON.parse(sessionID);
+  //   let sessionInfo = JSON.parse(allSessions[sessionID]);
+  //   // let sessionInfoObj = JSON.parse(sessionInfoStr);
+  //   console.log(sessionInfo);
+  //   console.log(sessionInfo.passport.user);
+  //   // console.log(sessionInfoObj);
+  //   details.push({
+  //     userID: sessionInfo.passport.user,
+  //     sessionID: sessionID,
+  //   });
+  // console.log("pooooops");
+  // console.log(details);
+  // // }
+
+    res.render('admin', {
+      user: req.user,
+      sessions: req.sessionStore.sessions,
+    });
+});
 
 module.exports = router;

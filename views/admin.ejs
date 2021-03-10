@@ -1,17 +1,22 @@
 <h1 class="mt-4">Dashboard</h1>
 <p class="lead mb-3">Welcome <%= user.name %></p>
 <p>
-  Current Active Sessions: <%= details.length %><br />
-  
+  Current Active Sessions:
 
-  <% details.forEach((session) => { %>
-    SessionID: <%= session.sessionID %> <br />
-    UserID: <%= session.userID %> <br />
-  <% }) %>
+  <br />
+  <%= Object.keys(sessions).length %>
+  <p><%
+    let userId;
+    for(let session of Object.keys(sessions)) {
+      userId = JSON.parse(sessions[session])["passport"]["user"];
+    %>
+        <p>
+          SessionID: <%= session %> <br>
+          UserID: <%= userId %>
+        </p>
 
+  <% } %>
+  </p>
 
-  <!-- <% for (const session in details.activeSessions) { %> SessionID: <%= session %> <br />
-  UserID: <%= session %> <br />
-  <% } %> -->
   <a href="">Revoke Session</a>
 </p>

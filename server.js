@@ -37,12 +37,13 @@ app.use(passport.session());
 
 // this is stuff happening under the hood
 app.use((req, res, next) => {
-  console.log(`User details are: `);
+  console.log(`--------------User details are: -------------`);
   console.log(req.user);
-  console.log(Object.keys(JSON.parse(JSON.stringify(req.sessionStore.sessions))));
+  console.log(
+    'All active session IDs: ' + Object.keys(JSON.parse(JSON.stringify(req.sessionStore.sessions)))
+  );
   console.log('Entire session object:');
   console.log(req.session);
-  session.all;
   console.log(`Session details are: `);
   console.log(req.session.passport);
   console.log(req.sessionID);

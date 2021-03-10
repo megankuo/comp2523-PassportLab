@@ -12,7 +12,10 @@ module.exports = {
     res.redirect('/dashboard');
   },
   isAdmin: function (req, res, next) {
-      if (req.user.isAdmin) {
+    if (!req.user) {
+      res.redirect('/auth/login');
+    }
+    if (req.user.isAdmin) {
       console.log('session user is admin');
       return next();
     }

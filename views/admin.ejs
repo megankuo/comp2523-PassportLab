@@ -12,11 +12,12 @@
     %>
         <p>
           SessionID: <%= session %> <br>
-          UserID: <%= userId %>
+          UserID: <%= userId %> <br>
+          <a href="/admin/revoke/<%= session %>">Revoke Session</a>
         </p>
 
   <% } %>
   </p>
 
-  <a href="">Revoke Session</a>
+
 </p>

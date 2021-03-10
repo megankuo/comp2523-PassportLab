@@ -23,16 +23,16 @@ router.get('/admin', isAdmin, (req, res) => {
   const allSessions = req.sessionStore.sessions;
   // console.log(allSessions);
   const details = [];
-//   req.sessionStore.all((error, sessions) => {
-//     for (let key in sessions) {
-//       details.push({
-//         userID: sessions[key].passport.user,
-//         sessionID: key,
-//       });
-// // console.log("im a looooop");
-//       console.log(details);
-//     }
-//   });
+  //   req.sessionStore.all((error, sessions) => {
+  //     for (let key in sessions) {
+  //       details.push({
+  //         userID: sessions[key].passport.user,
+  //         sessionID: key,
+  //       });
+  // // console.log("im a looooop");
+  //       console.log(details);
+  //     }
+  //   });
   // const allSessions = req.sessionStore.all((err, sessions) => {return sessions});
   // console.log(allSessions);
   // details.push({
@@ -56,10 +56,21 @@ router.get('/admin', isAdmin, (req, res) => {
   // console.log(details);
   // // }
 
-    res.render('admin', {
-      user: req.user,
-      sessions: req.sessionStore.sessions,
-    });
+  res.render('admin', {
+    user: req.user,
+    sessions: req.sessionStore.sessions,
+  });
+});
+
+//---------- Admin/Revoke Route -----------//
+// localhost:8081/dashboard
+router.get('/admin/revoke/:sessionID', (req, res) => {
+  const sessionID = req.params.sessionID;
+
+  // destroy session logic
+  req.sessionStore.destroy(sessionID);
+  console.log(sessionID + "was revoked");
+  res.redirect('/admin');
 });
 
 module.exports = router;
